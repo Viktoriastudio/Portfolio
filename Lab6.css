@@ -737,13 +737,17 @@ html {
         opacity: 0.8;
     }
 }
-
 .achievements-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 2.5rem;
 }
 
+@media (max-width: 1100px) {
+    .achievements-grid {
+        grid-template-columns: 1fr;
+    }
+}
 .achievement-card {
     font-family: var(--font-secondary);
     background: rgba(255, 255, 255, 0.95);
@@ -1609,4 +1613,5 @@ html {
     .about {
         min-height: 80vh;
     }
+
 }
