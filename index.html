@@ -22,6 +22,7 @@
             <li><a href="#achievements">Достижения</a></li>
             <li><a href="#tools">Инструменты</a></li>
             <li><a href="#contact">Контакты</a></li>
+            <li><a href="#feedback">Обратная связь</a></li> 
         </ul>
         <button class="navbar-toggle">
             <i class="fas fa-bars"></i>
@@ -63,7 +64,7 @@
         <!-- СЕКЦИЯ "МОИ ДОСТИЖЕНИЯ" -->
 <section class="achievements" id="achievements">
     <div class="achievements-background">
-        <img src="img/Job.jpg" alt="Фон секции достижений">
+        <img src="img/job.jpg" alt="Фон секции достижений">
     </div>
     <div class="achievements-overlay"></div>
     <div class="achievements-container">
@@ -393,7 +394,74 @@
                     <i class="fas fa-download"></i>
                     Скачать резюме
                 </a>
+
+                <a href="#feedback" 
+                    class="contact-button feedback-button">
+                    <i class="fas fa-comment-alt"></i>
+                    Оставить отзыв
+                </a>
             </div>
+        </div>
+    </section>
+
+        <!-- СЕКЦИЯ "ОБРАТНАЯ СВЯЗЬ" -->
+    <section class="feedback" id="feedback">
+        <div class="feedback-container">
+            <h2 class="section-heading">Обратная связь</h2>
+            
+            <p class="feedback-description">
+                Поделитесь своими впечатлениями о моем портфолио или оставьте предложения по сотрудничеству
+            </p>
+
+            <form id="feedbackForm" class="feedback-form">
+                <div class="form-group">
+                    <label for="name">Ваше имя *</label>
+                    <input type="text" id="name" name="name" required placeholder="Введите ваше имя">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required placeholder="example@mail.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Сообщение *</label>
+                    <textarea id="message" name="message" rows="5" required placeholder="Ваш отзыв или предложение..."></textarea>
+                </div>
+
+                <div class="form-group rating-group">
+                    <label>Оценка портфолио</label>
+                    <div class="rating-stars">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5">★</label>
+                        
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4">★</label>
+                        
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3">★</label>
+                        
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2">★</label>
+                        
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1">★</label>
+                    </div>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="permission" name="permission" required>
+                    <label for="permission">
+                        Я даю согласие на обработку моих персональных данных *
+                    </label>
+                </div>
+
+                <button type="submit" class="submit-button">
+                    <i class="fas fa-paper-plane"></i> Отправить отзыв
+                </button>
+
+                <div id="formMessage" class="form-message"></div>
+            </form>
         </div>
     </section>
 
@@ -559,7 +627,101 @@
                 navbar.classList.remove('scrolled');
             }
         });
+                // Форма обратной связи с getform.io
+        const feedbackForm = document.getElementById('feedbackForm');
+        const formMessage = document.getElementById('formMessage');
+        
+        // ЗАМЕНИТЕ ЭТОТ URL НА ВАШ ENDPOINT С GETFORM.IO
+        const FORM_ENDPOINT = 'https://getform.io/f/azyqwpyb';
+        
+        feedbackForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Получаем данные формы
+            const formData = new FormData(feedbackForm);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                message: formData.get('message'),
+                rating: formData.get('rating') || 'Не указана',
+                timestamp: new Date().toLocaleString('ru-RU'),
+                page: 'Portfolio Page'
+            };
+            
+            // Валидация
+            if (!data.name || !data.email || !data.message) {
+                showMessage('Пожалуйста, заполните все обязательные поля', 'error');
+                return;
+            }
+            
+            if (!document.getElementById('permission').checked) {
+                showMessage('Необходимо дать согласие на обработку данных', 'error');
+                return;
+            }
+            
+            // Отправка данных
+            try {
+                showMessage('Отправка отзыва...', 'loading');
+                
+                const submitButton = feedbackForm.querySelector('.submit-button');
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
+                
+                const response = await fetch(FORM_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.ok) {
+                    showMessage('Спасибо! Ваш отзыв успешно отправлен.', 'success');
+                    feedbackForm.reset();
+                    
+                    // Сбрасываем звезды рейтинга
+                    feedbackForm.querySelectorAll('input[name="rating"]').forEach(radio => {
+                        radio.checked = false;
+                    });
+                } else {
+                    throw new Error('Ошибка отправки');
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                showMessage('Произошла ошибка при отправке. Попробуйте еще раз.', 'error');
+            } finally {
+                const submitButton = feedbackForm.querySelector('.submit-button');
+                submitButton.disabled = false;
+                submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Отправить отзыв';
+                
+                // Автоматически скрываем сообщение через 5 секунд
+                setTimeout(() => {
+                    formMessage.style.display = 'none';
+                }, 5000);
+            }
+        });
+        
+        function showMessage(text, type) {
+            formMessage.textContent = text;
+            formMessage.className = 'form-message ' + type;
+            formMessage.style.display = 'block';
+        }
+        
+        // Анимация появления формы
+        const formObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        formObserver.observe(document.querySelector('.feedback-form'));
+
     </script>
 </body>
 </html>
-
