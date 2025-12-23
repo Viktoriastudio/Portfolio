@@ -1,4 +1,4 @@
-/* Базовые настройки */
+ /* Базовые настройки */
 * {
     margin: 0;
     padding: 0;
@@ -361,6 +361,209 @@ html {
     box-shadow: 0 10px 25px rgba(76, 103, 148, 0.4);
     transform: translateY(-3px);
 }
+/* Секция "Обратная связь" */
+.feedback {
+    padding: 5rem 8%;
+    background: linear-gradient(135deg, #f0f4ff 0%, #e6ebff 100%);
+    position: relative;
+}
+
+.feedback-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.feedback-description {
+    font-family: var(--font-primary);
+    font-size: 1.3rem;
+    font-weight: 300;
+    margin-bottom: 3rem;
+    color: var(--color-dark);
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+.feedback-form {
+    background: white;
+    padding: 3rem;
+    border-radius: 25px;
+    box-shadow: 0 15px 35px rgba(76, 103, 148, 0.1);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+}
+
+.feedback-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-dark));
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-group label {
+    display: block;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    color: var(--color-dark);
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #f8fafc;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(76, 103, 148, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Стили для звезд рейтинга */
+.rating-stars {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.rating-stars input {
+    display: none;
+}
+
+.rating-stars label {
+    font-size: 2.5rem;
+    color: #cbd5e0;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+}
+
+.rating-stars label:hover,
+.rating-stars label:hover ~ label,
+.rating-stars input:checked ~ label {
+    color: #fbbf24;
+}
+
+/* Стили для checkbox */
+.checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-top: 0.2rem;
+    accent-color: var(--color-accent);
+}
+
+.checkbox-group label {
+    font-weight: 400;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    cursor: pointer;
+    margin: 0;
+}
+
+/* Кнопка отправки */
+.submit-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    width: 100%;
+    padding: 1.2rem;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-dark));
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-family: var(--font-primary);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(76, 103, 148, 0.3);
+}
+
+.submit-button:hover {
+    background: linear-gradient(90deg, var(--color-dark), var(--color-accent));
+    box-shadow: 0 8px 20px rgba(76, 103, 148, 0.4);
+}
+
+/* Сообщения формы */
+.form-message {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 12px;
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    text-align: center;
+    display: none;
+}
+
+.form-message.success {
+    display: block;
+    background: #d1fae5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+}
+
+.form-message.error {
+    display: block;
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+.form-message.loading {
+    display: block;
+    background: #dbeafe;
+    color: #1e40af;
+    border: 1px solid #bfdbfe;
+}
+/* Стиль для кнопки отзыва */
+.feedback-button {
+   background: linear-gradient(90deg, var(--color-accent), var(--color-dark));
+    color: white;
+    cursor: pointer;
+    border: none; 
+    transition: all 0.1s ease;
+}
+
+.feedback-button:hover {
+   background: linear-gradient(90deg, var(--color-dark), var(--color-accent));
+    box-shadow: 0 10px 25px rgba(76, 103, 148, 0.4);
+}
 
 /* Адаптивность для Hero секции */
 @media (max-width: 900px) {
@@ -546,7 +749,7 @@ html {
     left: 100%;
 }
 .text-container:hover {
-    transform: translateY(-5px);
+   
     box-shadow: 
         0 20px 40px rgba(107, 141, 214, 0.15),
         0 8px 25px rgba(76, 103, 148, 0.1),
@@ -737,17 +940,17 @@ html {
         opacity: 0.8;
     }
 }
+
+/* ИСПРАВЛЕННЫЙ КОНТЕЙНЕР ДЛЯ 2 КОЛОНОК */
 .achievements-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2.5rem;
+    grid-template-columns: repeat(2, 1fr); /* Фиксированные 2 колонки */
+    gap: 30px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-@media (max-width: 1100px) {
-    .achievements-grid {
-        grid-template-columns: 1fr;
-    }
-}
 .achievement-card {
     font-family: var(--font-secondary);
     background: rgba(255, 255, 255, 0.95);
@@ -765,6 +968,7 @@ html {
     backdrop-filter: blur(10px);
     position: relative;
     overflow: hidden;
+    height: 100%; /* Важно для выравнивания высоты */
 }
 
 .achievement-card::before {
@@ -829,6 +1033,7 @@ html {
     position: relative;
     z-index: 2;
 }
+
 .achievement-title {
     font-family: var(--font-secondary);
     font-size: 1.5rem;
@@ -838,6 +1043,7 @@ html {
     line-height: 1.3;
     position: relative;
 }
+
 .achievement-title::after {
     content: '';
     position: absolute;
@@ -855,6 +1061,8 @@ html {
 
 .achievement-details {
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .achievement-details p {
@@ -895,6 +1103,7 @@ html {
         transform: scale(1.05);
     }
 }
+
 .achievement-chips {
     display: flex;
     flex-wrap: wrap;
@@ -910,13 +1119,15 @@ html {
     font-size: 0.8rem;
     font-weight: 500;
     display: inline-block;
-     transition: none;
+    transition: none;
 }
+
 .achievement-description {
     margin-bottom: 1.2rem;
     line-height: 1.6;
     color: var(--color-dark);
     font-size: 1rem;
+    flex-grow: 1; /* Чтобы описание занимало доступное пространство */
 }
 
 /* Индикатор нескольких изображений */
@@ -952,19 +1163,63 @@ html {
     gap: 5px;
 }
 
-/* Адаптивность */
-@media (max-width: 768px) {
+/* АДАПТИВНОСТЬ */
+@media (max-width: 1100px) {
     .achievements-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 25px;
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 900px) {
+    .achievements-grid {
+        grid-template-columns: 1fr; /* На планшетах - одна колонка */
+        gap: 20px;
+    }
+    
+    .achievement-card {
+        max-width: 600px; /* Ограничиваем ширину на мобильных */
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .achievements {
+        padding: 3rem 5%;
+    }
+    
+    .achievements-grid {
+        gap: 20px;
     }
     
     .achievement-info {
-        padding: 1.5rem;
+        padding: 1.2rem;
+    }
+    
+    .achievement-image {
+        height: 220px;
+    }
+    
+    .achievement-title {
+        font-size: 1.3rem;
     }
     
     .achievements-background img {
         animation: backgroundZoom 25s ease-in-out infinite;
+    }
+}
+
+@media (max-width: 480px) {
+    .achievement-image {
+        height: 200px;
+    }
+    
+    .achievement-title {
+        font-size: 1.2rem;
+    }
+    
+    .achievement-description {
+        font-size: 0.95rem;
     }
 }
 
@@ -1166,17 +1421,16 @@ html {
 
 /* Кнопка LinkedIn */
 .linkedin-button {
-    background: white;
-    color: var(--color-dark);
-    border: 2px solid transparent;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-dark));
+    color: white;
+    cursor: pointer;
+    border: none; 
     transition: all 0.5s ease;
 }
 
 .linkedin-button:hover {
-    background: var(--color-primary);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.469);
-    border-color: var(--color-secondary);
-    color: var(--color-dark);
+    background: linear-gradient(90deg, var(--color-dark), var(--color-accent));
+    box-shadow: 0 10px 25px rgba(76, 103, 148, 0.4);
 }
 /* Кнопка Скачать резюме */
 .cv-button {
@@ -1613,5 +1867,4 @@ html {
     .about {
         min-height: 80vh;
     }
-
 }
