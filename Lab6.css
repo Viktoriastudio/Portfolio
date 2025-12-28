@@ -869,7 +869,7 @@ html {
     animation: backgroundZoom 20s ease-in-out infinite;
 }
 .achievements-background {
-    background-image: url('img/job.jpg');
+    background-image: url('img/Job.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -1870,4 +1870,5 @@ html {
         min-height: 80vh;
     }
 }
+
 
